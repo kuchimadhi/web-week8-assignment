@@ -66,9 +66,9 @@ web-week8-assignment/
 
 ## Continuous Deployment Test
 
-After the first Netlify deployment, make a visible change (for example, update the dashboard subtitle), commit it, and push it to the connected `main` branch. Verify the new commit appears in Netlify's Deploys tab and that the live page reflects the change. Record the commit and deployment result here once verified.
+**Visible update prepared:** the dashboard welcome subtitle was updated in a follow-up GitHub commit. Once Netlify is connected to this repository, verify that this commit triggers a production deploy and that the updated subtitle appears on the live site. The automated deploy has not yet been verified.
 
-**Status:** GitHub project files are prepared. Netlify connection, first production deployment, live URL confirmation, and the post-deployment update test still need to be completed in the Netlify account.
+**Status:** GitHub project files are prepared and pushed. Netlify connection, first production deployment, live URL confirmation, and verification of the automatic deployment test still need to be completed in the Netlify account.
 
 ## Challenges Encountered During Deployment
 
