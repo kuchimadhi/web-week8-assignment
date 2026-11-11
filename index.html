@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f8f5">
+  <meta name="description" content="SpendWise helps you track expenses, manage your monthly budget, and build healthier money habits.">
+  <title>SpendWise — Personal Budget Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="SpendWise home"><span class="brand-mark"><i data-lucide="wallet"></i></span><span>spend<span class="brand-accent">wise</span></span></a>
+      <div class="side-label">WORKSPACE</div>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a class="nav-link active" href="#overview"><i data-lucide="layout-dashboard"></i> Overview</a>
+        <a class="nav-link" href="#transactions"><i data-lucide="arrow-left-right"></i> Transactions</a>
+        <a class="nav-link" href="#budget"><i data-lucide="target"></i> Budget</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="tip-card"><span class="tip-icon"><i data-lucide="lightbulb"></i></span><strong>Small steps add up.</strong><p>Track your spending today and make room for what matters tomorrow.</p></div>
+        <div class="profile"><div class="avatar">KM</div><div><strong>My account</strong><span>Personal workspace</span></div><i data-lucide="chevron-down"></i></div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="overview">
+      <header class="topbar"><div><p class="eyebrow" id="today-label">YOUR MONEY, IN FOCUS</p><h1>Good day <span class="wave">✦</span></h1><p class="subtitle">Here’s what’s happening with your money.</p></div><button class="primary-btn" id="open-expense"><i data-lucide="plus"></i> Add expense</button></header>
+
+      <section class="summary-grid" aria-label="Financial summary">
+        <article class="summary-card balance-card"><div class="card-top"><span>Total balance</span><span class="icon-bubble"><i data-lucide="wallet"></i></span></div><p class="metric" id="balance-value">KSh 0</p><div class="card-foot"><span class="status-dot"></span> Available this month</div></article>
+        <article class="summary-card"><div class="card-top"><span>Monthly budget</span><span class="icon-bubble purple"><i data-lucide="calendar-days"></i></span></div><p class="metric" id="budget-value">KSh 0</p><div class="card-foot muted">Your spending limit</div></article>
+        <article class="summary-card"><div class="card-top"><span>Total spent</span><span class="icon-bubble orange"><i data-lucide="trending-down"></i></span></div><p class="metric" id="spent-value">KSh 0</p><div class="card-foot muted" id="spent-caption">Across all categories</div></article>
+        <article class="summary-card"><div class="card-top"><span>Remaining</span><span class="icon-bubble blue"><i data-lucide="piggy-bank"></i></span></div><p class="metric" id="remaining-value">KSh 0</p><div class="card-foot" id="remaining-caption">Keep it up!</div></article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel budget-panel" id="budget">
+          <div class="panel-heading"><div><p class="eyebrow">MONTHLY PLAN</p><h2>Budget overview</h2></div><button class="text-btn" id="edit-budget">Edit budget <i data-lucide="arrow-up-right"></i></button></div>
+          <div class="budget-total"><div><span class="muted">You've used</span><strong id="budget-percent">0%</strong></div><span class="muted" id="budget-summary">KSh 0 of KSh 0</span></div>
+          <div class="progress-track"><div class="progress-fill" id="budget-progress"></div></div>
+          <div class="budget-legend"><span><i class="legend-dot spent-dot"></i> Spent</span><span><i class="legend-dot left-dot"></i> Left</span></div>
+          <div class="category-list" id="category-list"></div>
+        </article>
+
+        <article class="panel activity-panel">
+          <div class="panel-heading"><div><p class="eyebrow">YOUR HABITS</p><h2>Spending snapshot</h2></div><span class="soft-tag">This month</span></div>
+          <div class="snapshot-total"><strong id="snapshot-total">KSh 0</strong><span class="muted">Total expenses</span></div>
+          <div class="bar-chart" id="spending-chart" aria-label="Spending by category"></div>
+          <p class="chart-note"><i data-lucide="sparkles"></i> A clearer picture makes better choices.</p>
+        </article>
+      </section>
+
+      <section class="panel transactions-panel" id="transactions">
+        <div class="panel-heading transaction-heading"><div><p class="eyebrow">THE DETAILS</p><h2>Recent transactions</h2></div><div class="table-actions"><label class="search-box"><i data-lucide="search"></i><input id="search-input" type="search" placeholder="Search expenses..." aria-label="Search expenses"></label><select id="category-filter" aria-label="Filter by category"><option value="all">All categories</option><option>Food</option><option>Transport</option><option>Shopping</option><option>Bills</option><option>Health</option><option>Other</option></select></div></div>
+        <div class="table-wrap"><table><thead><tr><th>NAME</th><th>CATEGORY</th><th>DATE</th><th class="amount-cell">AMOUNT</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody id="transaction-list"></tbody></table><div class="empty-state" id="empty-state" hidden><span class="empty-icon"><i data-lucide="receipt-text"></i></span><strong>No transactions yet</strong><p>Add your first expense to see it here.</p><button class="text-btn" id="empty-add">Add an expense <i data-lucide="arrow-right"></i></button></div></div>
+      </section>
+      <footer class="footer">Made with care for your financial wellbeing <span>·</span> SpendWise</footer>
+    </main>
+  </div>
+
+  <dialog class="modal" id="expense-modal">
+    <form id="expense-form" method="dialog">
+      <div class="modal-heading"><div><p class="eyebrow">KEEP TRACK</p><h2>Add an expense</h2></div><button class="close-btn" type="button" data-close aria-label="Close"><i data-lucide="x"></i></button></div>
+      <label class="field-label" for="expense-name">Expense name</label><input class="field-input" id="expense-name" name="name" placeholder="e.g. Lunch with friends" maxlength="60" required>
+      <label class="field-label" for="expense-amount">Amount (KSh)</label><input class="field-input" id="expense-amount" name="amount" type="number" min="1" step="1" placeholder="0" required>
+      <label class="field-label" for="expense-category">Category</label><select class="field-input" id="expense-category" name="category"><option>Food</option><option>Transport</option><option>Shopping</option><option>Bills</option><option>Health</option><option>Other</option></select>
+      <label class="field-label" for="expense-date">Date</label><input class="field-input" id="expense-date" name="date" type="date" required>
+      <div class="modal-actions"><button class="secondary-btn" type="button" data-close>Cancel</button><button class="primary-btn" type="submit">Save expense</button></div>
+    </form>
+  </dialog>
+
+  <dialog class="modal" id="budget-modal">
+    <form id="budget-form" method="dialog"><div class="modal-heading"><div><p class="eyebrow">PLAN AHEAD</p><h2>Set monthly budget</h2></div><button class="close-btn" type="button" data-close aria-label="Close"><i data-lucide="x"></i></button></div><label class="field-label" for="budget-input">Budget amount (KSh)</label><input class="field-input" id="budget-input" type="number" min="1" step="1" required><div class="modal-actions"><button class="secondary-btn" type="button" data-close>Cancel</button><button class="primary-btn" type="submit">Save budget</button></div></form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
